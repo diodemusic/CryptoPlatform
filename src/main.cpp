@@ -1,51 +1,69 @@
 #include <iostream>
+#include <string.h>
 
-bool optionIsValid(int userOption, int min, int max)
+using namespace std;
+
+bool optionIsValid(int userOption, int max)
 {
-    if (userOption < min or userOption > max)
+    if (userOption < 1 or userOption > max)
     {
         return false;
     }
-
     return true;
 }
 
 void printOptions()
 {
-    // 1 print help
-    std::cout << "1: Print help " << std::endl;
-
-    // 2 print exchange stats
-    std::cout << "2: Print exchange stats " << std::endl;
-
-    // 3 make an offer
-    std::cout << "3: Make an offer " << std::endl;
-    
-    // 4 make a bid
-    std::cout << "4: Make a bid " << std::endl;
-
-    // 5 print wallet
-    std::cout << "5: Print wallet " << std::endl;
-
-    // 6 continue
-    std::cout << "6: Continue" << std::endl;
-
-    std::cout << "========== " << std::endl;
-    std::cout << "Press 1-6" << std::endl;
-
+    int numMenuOptions = 7;
+    string options[numMenuOptions] = {
+        "1: Print help",
+        "2: Print exchange stats",
+        "3: Make an offer",
+        "4: Make a bid",
+        "5: Print wallet",
+        "6: Continue",
+        "7: Exit"
+    };
+    string results[numMenuOptions] = {
+        "Help - your aim is to make money. Analyze the market and make binds and offers.",
+        "Market looks good.",
+        "Make an offer - enter the amount.",
+        "Make a bid - enter the amount.",
+        "Your wallet is empty.",
+        "Going to next time frame.",
+        "Exiting...",
+    };
     int userOption;
-    std::cin >> userOption;
+    bool printAgain = true;
 
-    if (!optionIsValid(userOption, 1, 6))
+    while (printAgain)
     {
-        std::cout << "Please only press a number from 1-6" << std::endl;
-        return;
-    }
+        for (string option : options)
+        {
+            cout << option << endl;
+        }
 
-    std::cout << "You chose: " << userOption << std::endl;
+        cout << "========== " << endl;
+        cout << "Press 1-" << numMenuOptions << endl;
+
+        cin >> userOption;
+
+        if (!optionIsValid(userOption, numMenuOptions))
+        {
+            cout << "Invalid choice. Choose 1-" << numMenuOptions << endl;
+            return;
+        }
+
+        cout << results[userOption - 1] << endl;
+
+        if (userOption == 7)
+        {
+            printAgain = false;
+        }
+    }
 }
 
-int main() 
+int main()
 {
     printOptions();
     return 0;
