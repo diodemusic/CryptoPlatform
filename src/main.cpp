@@ -51,7 +51,7 @@ void printOptions()
         if (!optionIsValid(userOption, numMenuOptions))
         {
             cout << "Invalid choice. Choose 1-" << numMenuOptions << endl;
-            return;
+            continue;
         }
 
         cout << results[userOption - 1] << endl;
