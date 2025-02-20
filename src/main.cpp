@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include <string.h>
 
 using namespace std;
@@ -26,6 +27,12 @@ string results[numMenuOptions] = {
 
 bool inputIsValid(int userOption)
 {
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return false;
+    }
     if (userOption < 1 or userOption > numMenuOptions)
     {
         return false;
