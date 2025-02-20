@@ -109,7 +109,7 @@ void processUserOption(int userOption, map<int, void(*)()> menu)
 {
     if (!optionIsValid(userOption))
     {
-        cout << "Invalid input. Please enter a number from 1-6" << endl;
+        cout << "Invalid input. Please enter a number from 1-" << numMenuOptions << endl;
         return;
     }
 
