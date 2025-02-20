@@ -1,6 +1,3 @@
-.gitignore
 *.exe
 .vscode
-worksheet.cpp
 TODO.md
-MerkelRex_menu_system.mp4
