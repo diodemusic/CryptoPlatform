@@ -2,7 +2,7 @@
 
 ## Built for the Coursera course: University of London Object Oriented Programming
 
-CryptoPlatform is a simple C++ application that simulates a cryptocurrency trading platform. The application provides a menu-driven interface for users to interact with various features such as printing help, viewing exchange stats, making offers and bids, printing the wallet, and advancing to the next time frame.
+CryptoPlatform is a C++ application that simulates a cryptocurrency trading platform. The application provides a menu-driven interface for users to interact with various features such as printing help, viewing exchange stats, making offers and bids, printing the wallet, and advancing to the next time frame.
 
 ## Features
 

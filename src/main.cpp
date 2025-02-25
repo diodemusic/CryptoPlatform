@@ -119,6 +119,20 @@ enum class orderBookType
     bid
 };
 
+std::ostream &operator<<(std::ostream &os, const orderBookType &type)
+{
+    switch (type)
+    {
+    case orderBookType::ask:
+        os << "ask";
+        break;
+    case orderBookType::bid:
+        os << "bid";
+        break;
+    }
+    return os;
+}
+
 class OrderBookEntry
 {
 private:
@@ -131,7 +145,7 @@ private:
 public:
     /** Create a new OrderBookEntry
      */
-    OrderBookEntry::OrderBookEntry(std::string _timestamp, std::string _products, orderBookType _orderType, double _price, double _amount)
+    OrderBookEntry(std::string _timestamp, std::string _products, orderBookType _orderType, double _price, double _amount)
         : timestamp(_timestamp),
           products(_products),
           orderType(_orderType),
@@ -265,15 +279,21 @@ int main()
         300,
         300.5});
 
+    for (const OrderBookEntry &entry : entries)
+    {
+        std::cout << "Timestamp: " << entry.getTimestamp() << std::endl;
+        std::cout << "Products: " << entry.getProducts() << std::endl;
+        std::cout << "Order Type: " << entry.getOrderType() << std::endl;
+        std::cout << "Price: " << entry.getPrice() << std::endl;
+        std::cout << "Amount: " << entry.getAmount() << std::endl;
+        std::cout << "==========" << std::endl;
+    }
+
+    std::cout << "++++++++++" << std::endl;
     std::cout << "High: " << computeHighPrice(entries) << std::endl;
     std::cout << "Low: " << computeLowPrice(entries) << std::endl;
     std::cout << "Avg: " << computeAveragePrice(entries) << std::endl;
     std::cout << "Spread: " << computePriceSpread(entries) << std::endl;
-
-    for (const OrderBookEntry &entry : entries)
-    {
-        std::cout << "Timestamp: " << entry.getTimestamp() << std::endl;
-    }
 
     while (printAgain)
     {
