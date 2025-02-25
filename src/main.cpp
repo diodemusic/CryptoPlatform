@@ -3,7 +3,7 @@
 #include <map>
 #include <vector>
 
-int numMenuOptions = 7;
+int NUMMENUOPTIONS = 7;
 bool printAgain = true;
 
 void exitProgram()
@@ -59,7 +59,7 @@ bool optionIsValid(int userOption)
         return false;
     }
 
-    if (userOption < 1 or userOption > numMenuOptions)
+    if (userOption < 1 or userOption > NUMMENUOPTIONS)
     {
         return false;
     }
@@ -71,7 +71,7 @@ void processUserOption(int userOption, std::map<int, void (*)()> menu)
 {
     if (!optionIsValid(userOption))
     {
-        std::cout << "Invalid input. Please enter a number from 1-" << numMenuOptions << std::endl;
+        std::cout << "Invalid input. Please enter a number from 1-" << NUMMENUOPTIONS << std::endl;
         return;
     }
 
@@ -80,7 +80,7 @@ void processUserOption(int userOption, std::map<int, void (*)()> menu)
 
 void printMenu()
 {
-    std::string options[numMenuOptions] = {
+    std::string options[NUMMENUOPTIONS] = {
         "\n1: Print help",
         "2: Print exchange stats",
         "3: Make an offer",
@@ -95,7 +95,7 @@ void printMenu()
     }
 
     std::cout << "====================" << std::endl;
-    std::cout << "Press 1-" << numMenuOptions << std::endl;
+    std::cout << "Press 1-" << NUMMENUOPTIONS << std::endl;
 }
 
 std::map<int, void (*)()> getMenu()
