@@ -3,8 +3,8 @@
 #include <map>
 #include <vector>
 
-int numMenuOptions;
-bool printAgain;
+int numMenuOptions = 7;
+bool printAgain = true;
 
 void exitProgram()
 {
@@ -89,7 +89,7 @@ void printMenu()
         "6: Continue",
         "7: Exit"};
 
-    for (std::string option : options)
+    for (const std::string &option : options)
     {
         std::cout << option << std::endl;
     }
@@ -129,7 +129,9 @@ private:
     double amount;
 
 public:
-    OrderBookEntry(std::string _timestamp, std::string _products, orderBookType _orderType, double _price, double _amount)
+    /** Create a new OrderBookEntry
+     */
+    OrderBookEntry::OrderBookEntry(std::string _timestamp, std::string _products, orderBookType _orderType, double _price, double _amount)
         : timestamp(_timestamp),
           products(_products),
           orderType(_orderType),
@@ -212,7 +214,7 @@ double computePriceSpread(const std::vector<OrderBookEntry> &entries)
 {
     double buyerHighPrice = 0;
     double sellerLowPrice = entries[0].getPrice();
-    
+
     for (const OrderBookEntry &entry : entries)
     {
         if (entry.getOrderType() == orderBookType::ask)
@@ -263,7 +265,10 @@ int main()
         300,
         300.5});
 
-    std::cout << computePriceSpread(entries) << std::endl;
+    std::cout << "High: " << computeHighPrice(entries) << std::endl;
+    std::cout << "Low: " << computeLowPrice(entries) << std::endl;
+    std::cout << "Avg: " << computeAveragePrice(entries) << std::endl;
+    std::cout << "Spread: " << computePriceSpread(entries) << std::endl;
 
     for (const OrderBookEntry &entry : entries)
     {
