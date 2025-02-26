@@ -36,7 +36,27 @@ void MerkelMain::placeBid()
 
 void MerkelMain::printExchangeStats()
 {
-    std::cout << "Market looks good." << std::endl;
+    unsigned int i = 1;
+
+    std::cout << "EXCHANGE STATS:" << std::endl;
+    std::cout << "==========" << std::endl;
+
+    for (const OrderBookEntry &order : this->orders)
+    {
+        std::cout << "Order " << i << "." << std::endl;
+        std::cout << "Timestamp: " << order.getTimestamp() << std::endl;
+        std::cout << "Products: " << order.getProducts() << std::endl;
+        // ! FIX std::cout << "Order Type: " << order.getOrderType() << std::endl;
+        std::cout << "Price: " << order.getPrice() << std::endl;
+        std::cout << "Amount: " << order.getAmount() << std::endl;
+        std::cout << "==========" << std::endl;
+        i++;
+    }
+
+    std::cout << "High: " << this->computeHighPrice(orders) << std::endl;
+    std::cout << "Low: " << this->computeLowPrice(orders) << std::endl;
+    std::cout << "Avg: " << this->computeAveragePrice(orders) << std::endl;
+    std::cout << "Spread: " << this->computePriceSpread(orders) << std::endl;
 }
 
 void MerkelMain::printHelp()
@@ -188,7 +208,7 @@ double MerkelMain::computePriceSpread(const std::vector<OrderBookEntry> &entries
     return sellerLowPrice - buyerHighPrice;
 }
 
-std::vector<OrderBookEntry> MerkelMain::loadOrderBook()
+void MerkelMain::loadOrderBook()
 {
     std::vector<OrderBookEntry> orders;
 
@@ -213,34 +233,21 @@ std::vector<OrderBookEntry> MerkelMain::loadOrderBook()
         300,
         300.5});
 
-    return orders;
+    this->orders = orders;
 }
 
 void MerkelMain::init()
 {
-    std::vector<OrderBookEntry> orders = loadOrderBook();
+    this->loadOrderBook();
+}
 
-    for (const OrderBookEntry &order : orders)
-    {
-        std::cout << "Timestamp: " << order.getTimestamp() << std::endl;
-        std::cout << "Products: " << order.getProducts() << std::endl;
-        // ! FIX std::cout << "Order Type: " << order.getOrderType() << std::endl;
-        std::cout << "Price: " << order.getPrice() << std::endl;
-        std::cout << "Amount: " << order.getAmount() << std::endl;
-        std::cout << "==========" << std::endl;
-    }
-
-    std::cout << "++++++++++" << std::endl;
-    std::cout << "High: " << computeHighPrice(orders) << std::endl;
-    std::cout << "Low: " << computeLowPrice(orders) << std::endl;
-    std::cout << "Avg: " << computeAveragePrice(orders) << std::endl;
-    std::cout << "Spread: " << computePriceSpread(orders) << std::endl;
-
+void MerkelMain::run()
+{
     while (true)
     {
-        printMenu();
-        int userOption = getUserOption();
-        std::map<int, void (MerkelMain::*)()> menu = getMenu();
-        processUserOption(userOption, menu);
+        this->printMenu();
+        int userOption = this->getUserOption();
+        std::map<int, void (MerkelMain::*)()> menu = this->getMenu();
+        this->processUserOption(userOption, menu);
     }
 }

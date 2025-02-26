@@ -12,6 +12,7 @@ class MerkelMain
 public:
     MerkelMain() = default;
     void init();
+    void run();
 
 private:
     void exitProgram();
@@ -30,5 +31,6 @@ private:
     double computeLowPrice(const std::vector<OrderBookEntry> &entries);
     double computeHighPrice(const std::vector<OrderBookEntry> &entries);
     double computePriceSpread(const std::vector<OrderBookEntry> &entries);
-    std::vector<OrderBookEntry> loadOrderBook();
+    void loadOrderBook();
+    std::vector<OrderBookEntry> orders;
 };
