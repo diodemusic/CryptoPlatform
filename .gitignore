@@ -1,4 +1,4 @@
 *.exe
 .vscode
 TODO.md
-/build/MerkelRex.exe
+/build/MerkelRex.out
